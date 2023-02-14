@@ -1,0 +1,46 @@
+#searchbar {
+  min-height: 30vh;
+  background: rgb(131, 58, 180);
+  background: linear-gradient(
+    180deg,
+    #833ab4 0%,
+    rgba(253, 29, 29, 1) 50%,
+    rgba(252, 176, 69, 1) 100%
+  );
+  padding-top: 40px;
+}
+
+.searchbar__container {
+  display: flex;
+  justify-content: center;
+}
+
+.searchButton {
+  background-color: #003049;
+  border: none;
+  border-radius: 6px;
+  padding: 16px;
+  margin-left: 8px;
+  font-family: "Lato";
+  color: #f6f2df;
+}
+
+.searchTerm {
+  border: none;
+  border-radius: 6px;
+  padding: 16px 240px 16px 24px;
+  margin-right: 8px;
+  background-color: #003049;
+  color: #f6f2df;
+  font-family: "Lato";
+}
+
+::placeholder {
+  font-family: "Lato";
+  font-size: 16px;
+  color: #f6f2df;
+}
+
+:focus {
+  outline: none;
+}

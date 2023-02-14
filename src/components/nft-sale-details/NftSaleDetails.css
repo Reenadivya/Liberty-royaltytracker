@@ -1,0 +1,49 @@
+.nftsaledetails__container {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid burlywood;
+  border-radius: 8px;
+}
+
+.nftsaledetails__container--header {
+  font-family: "Montserrat";
+  font-size: 36px;
+  padding-top: 24px;
+}
+
+.nftsaledetails__subcontainer {
+  margin-top: 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-family: "Lato";
+}
+
+.nftimg__left-container {
+  width: 30%;
+  margin: 0 16px 0 16px;
+}
+
+.nftresult__right-container {
+  width: 70%;
+  border: 3px solid burlywood;
+  border-radius: 8px;
+  margin: 0 16px 0 16px;
+}
+
+.nftresult__heading {
+  padding: 8px;
+}
+
+.nft__image--wrapper {
+  width: 100%;
+}
+
+.nft__image {
+  width: 100%;
+  border-radius: 8px;
+}
