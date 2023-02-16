@@ -14,4 +14,6 @@ function SalesPagination({ page, setPage }) {
   );
 }
 
+//Random
+
 export default SalesPagination;
