@@ -10,13 +10,16 @@ function useGetMetaData(mintAdd) {
 
   async function getMetaData(mintAdd) {
     try {
+      setmetaDataLoading(true);
       const { data } = await axios.post(
         `https://api.helius.xyz/v0/tokens/metadata?api-key=${apiKey}`,
         { mintAccounts: mintAdd }
       );
+      setmetaDataLoading(false);
       console.log("metadata: ", data[0]);
       setMetaData(data[0]);
     } catch (err) {
+      setmetaDataLoading(false);
       setmetaDataError(err);
     } finally {
       setmetaDataLoading(false);
@@ -25,7 +28,7 @@ function useGetMetaData(mintAdd) {
 
   useEffect(() => {
     if (mintAdd) {
-      setmetaDataLoading(true);
+      setmetaDataLoading(false);
       const nftAddresses = [mintAdd];
       getMetaData(nftAddresses);
     }

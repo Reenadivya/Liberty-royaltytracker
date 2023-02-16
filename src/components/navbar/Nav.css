@@ -1,7 +1,7 @@
 nav {
   font-family: "Montserrat";
   font-weight: 500;
-  background-color: #833ab4;
+  background-color: #fff;
 }
 
 ul {
@@ -10,7 +10,7 @@ ul {
 
 a {
   text-decoration: none;
-  color: #f6f2df;
+  color: #5f5f5f;
 }
 
 .navbar__logo {
