@@ -10,6 +10,7 @@ function useParseTxn(searchFeildString) {
 
   async function parseTxn(searchFeildString) {
     try {
+      setLoading(true);
       const { data } = await axios.post(
         `https://api.helius.xyz/v0/transactions/?api-key=${apiKey}`,
         {
@@ -17,8 +18,10 @@ function useParseTxn(searchFeildString) {
         }
       );
       console.log("Parse Txn: ", data[0]);
+      setLoading(false);
       setData(data[0]);
     } catch (err) {
+      setLoading(false);
       setError(err);
     } finally {
       setLoading(false);
@@ -27,7 +30,7 @@ function useParseTxn(searchFeildString) {
 
   useEffect(() => {
     if (searchFeildString) {
-      setLoading(true);
+      setLoading(false);
       parseTxn(searchFeildString);
     }
   }, [searchFeildString]);

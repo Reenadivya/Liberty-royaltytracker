@@ -1,0 +1,58 @@
+#nftsalecollectionquery {
+  font-family: "Montserrat";
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 40px;
+}
+
+.header {
+  padding: 8px 0;
+}
+
+.subheader {
+  padding: 8px 0;
+}
+
+.faq {
+  padding: 8px 0;
+  font-weight: bold;
+}
+
+.faq__para {
+  padding: 8px 0;
+  line-height: 26px;
+}
+
+.dashboard {
+  font-family: "Lato";
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+}
+
+.table__row {
+  display: flex;
+  flex-direction: row;
+  border: 2px solid black;
+}
+
+.dashboard__row--container {
+  display: flex;
+}
+
+.column {
+  padding: 0 12px;
+}
+
+.dashboard__header {
+  padding: 16px;
+}
+
+.long-string {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

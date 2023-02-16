@@ -18,7 +18,6 @@ function LandingPage() {
       </div>
       <div className="scroll">
         <p className="scroll--heading">Scroll Below To Start Searching</p>
-        <p className="scroll--para">^</p>
       </div>
     </section>
   );
