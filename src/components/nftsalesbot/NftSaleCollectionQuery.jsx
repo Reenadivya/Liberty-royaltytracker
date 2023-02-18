@@ -11,6 +11,7 @@ function NftSaleCollectionQuery() {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const url = `https://api.helius.xyz/v1/nft-events?api-key=2865692e-2c75-42e5-ba5a-4fa45f213a41`;
+  const RESULTS_PER_PAGE = 10;
 
   const getSales = async (searchterm) => {
     setLoading(true);
@@ -23,15 +24,20 @@ function NftSaleCollectionQuery() {
         },
       },
     });
-    setSales(data?.result.slice(0, 6));
+    setSales((prevSales) => [...prevSales, ...data?.result]);
     setLoading(false);
-    console.log(data.result.slice(0, 6));
   };
 
   function handleSubmit(event) {
     event.preventDefault();
     const searchFieldString = event.target[0].value;
     setSearchTerm(searchFieldString);
+  }
+
+  function getPageData() {
+    const start = (page - 1) * RESULTS_PER_PAGE;
+    const end = start + RESULTS_PER_PAGE;
+    return sales?.slice(start, end);
   }
 
   useEffect(() => {
@@ -98,7 +104,7 @@ function NftSaleCollectionQuery() {
                   </tr>
                 </thead>
                 <tbody>
-                  {sales?.map((sales, index) => (
+                  {getPageData().map((sales, index) => (
                     <DashboadRow data={sales} loading={loading} key={index} />
                   ))}
                 </tbody>
@@ -106,7 +112,12 @@ function NftSaleCollectionQuery() {
             </div>
           </div>
           <div>
-            <SalesPagination page={page} setPage={setPage} />
+            <SalesPagination
+              page={page}
+              setPage={setPage}
+              totalResults={sales?.length}
+              resultsPerPage={RESULTS_PER_PAGE}
+            />
           </div>
         </>
       )}
