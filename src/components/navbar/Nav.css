@@ -1,7 +1,7 @@
 nav {
-  font-family: "Montserrat";
+  font-family: "Lato";
   font-weight: 500;
-  background-color: #fff;
+  background-color: #0d0d0d;
 }
 
 ul {
@@ -10,7 +10,7 @@ ul {
 
 a {
   text-decoration: none;
-  color: #5f5f5f;
+  color: #1dbf73;
 }
 
 .navbar__logo {
@@ -32,6 +32,8 @@ a {
 
 .navbar__list-item {
   padding: 16px 16px 10px 18px;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .link__hover {
@@ -47,9 +49,9 @@ a {
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: #f6f2df;
+  background-color: #ea8c55;
   transform-origin: bottom right;
-  transition: transform 0.25s ease-out;
+  transition: transform 0.35s ease-out;
 }
 
 .link__hover:hover::after {

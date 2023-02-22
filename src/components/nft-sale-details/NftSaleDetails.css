@@ -1,26 +1,34 @@
+#nftsaledetails {
+  background-color: #0d0d0d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 48px;
+  height: 100vh;
+}
+
 .nftsaledetails__container {
-  margin-top: 16px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 3px solid burlywood;
-  border-radius: 8px;
 }
 
 .nftsaledetails__container--header {
   font-family: "Montserrat";
   font-size: 36px;
   padding-top: 24px;
+  color: #ffffff;
 }
 
 .nftsaledetails__subcontainer {
   margin-top: 40px;
-  width: 100%;
+  width: 540px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   font-family: "Lato";
+  color: #ffffff;
 }
 
 .nftimg__left-container {
@@ -29,10 +37,12 @@
 }
 
 .nftresult__right-container {
-  width: 70%;
-  border: 3px solid burlywood;
+  width: 100%;
   border-radius: 8px;
   margin: 0 16px 0 16px;
+  background-color: #1d1d1d;
+  box-shadow: rgba(179, 181, 186, 0.386) 0px 4px 8px -2px,
+    rgba(92, 95, 98, 0.842) 0px 0px 0px 1px;
 }
 
 .nftresult__heading {
@@ -46,4 +56,14 @@
 .nft__image {
   width: 100%;
   border-radius: 8px;
+}
+
+.loading__text {
+  font-family: "Lato";
+  color: #1dbf73;
+}
+
+.null__background {
+  background-color: #0d0d0d;
+  height: 100vh;
 }

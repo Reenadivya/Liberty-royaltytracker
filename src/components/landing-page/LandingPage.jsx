@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./LandingPageStyle.css";
 
 function LandingPage() {
@@ -6,18 +7,23 @@ function LandingPage() {
     <section id="landingpage__section">
       <div className="landingpage__section--container">
         <h1 className="landingpage__section--header">
-          Solana's Royalty Tracker Tool
+          <span className="orange">Solana's Royalty Tracker Tool</span>
         </h1>
         <h2 className="landingpage__section--subheading">
-          Made for creators, NFT enthusiasts and all NFT noobs.
+          Made for creators, NFT enthusiasts and degens.
         </h2>
         <h3 className="landingpage__section--para">
           Check Royalty Rate Fulfillment for Various NFT Collections and
-          Transactions. Track the latest NFT sales across all marketplaces.
+          Transactions.<br></br>Track The Latest NFT Sales Across All
+          Marketplaces.
         </h3>
       </div>
       <div className="scroll">
-        <p className="scroll--heading">Scroll Below To Start Searching</p>
+        <button className="btn">
+          <Link to="/" className="scroll--heading">
+            Start Your Search Now
+          </Link>
+        </button>
       </div>
     </section>
   );

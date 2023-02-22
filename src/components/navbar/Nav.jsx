@@ -16,7 +16,10 @@ function Nav() {
               <Link to="/">Home</Link>
             </li>
             <li className="navbar__list-item link__hover">
-              <Link to="/searchresults">Search</Link>
+              <Link to="/royalty">Royalty</Link>
+            </li>
+            <li className="navbar__list-item link__hover">
+              <Link to="/nftcollection">NFT Collection</Link>
             </li>
           </ul>
         </div>

@@ -1,42 +1,95 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./NftSaleDetails.css";
-import useParseTxn from "../fetchAPI/useParseTxn";
-import useGetMetaData from "../fetchAPI/useGetMetaData";
-import NftSaleCard from "./NftSaleCard";
+import Skeleton from "../skeleton/Skeleton";
+import axios from "axios";
 
 function NftSaleDetails({ searchTerm }) {
-  const { data, loading, error } = useParseTxn(searchTerm);
-  console.log(data);
-  const mintAcc = data?.events.nft.nfts[0].mint;
-  const nativeTrf = data?.nativeTransfers;
-  const { metadata, metaDataError, metaDataLoading } = useGetMetaData(mintAcc);
-  console.log(metadata);
-  const creators = metadata?.onChainData?.data.creators;
-  const [royaltypaid, setRoyaltyPaid] = useState("");
+  const apiKey = "2865692e-2c75-42e5-ba5a-4fa45f213a41";
+  const lamports = 10 ** 9;
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  if (metadata) {
-    for (const creator of creators) {
-      if (creator.share > 0) {
-        const royaltypayment = nativeTrf.filter(
-          (trf) => trf.toUserAccount === creator.address
-        );
-        if (royaltypayment.length > 0) {
-          const payentAmt = royaltypayment[0].amount;
-          console.log(`${payentAmt} was paid to ${creator.address}`);
-        } else {
-          console.log(`Royalties not paid to ${creator.address}`);
+  async function parseTxn(searchFeildString) {
+    try {
+      setLoading(true);
+      const { data } = await axios.post(
+        `https://api.helius.xyz/v0/transactions/?api-key=${apiKey}`,
+        {
+          transactions: [searchFeildString],
         }
-      }
+      );
+      console.log("Parse Txn: ", data[0]);
+      setData(data[0]);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      setError(err);
+      console.log(error);
     }
   }
 
+  useEffect(() => {
+    if (searchTerm) {
+      parseTxn(searchTerm);
+    }
+  }, [searchTerm]);
+
   return (
-    <section id="nftsaledetails">
-      <div className="nftsaledetails__container">
-        <h2 className="nftsaledetails__container--header">Sale Details</h2>
-        <NftSaleCard />
-      </div>
-    </section>
+    <div className="null__background">
+      {!searchTerm ? null : (
+        <section id="nftsaledetails">
+          <div className="nftsaledetails__container">
+            <h2 className="nftsaledetails__container--header">Sale Details</h2>
+            {loading ? (
+              <div className="nftresult__right-container">
+                <h3 className="nftresult__heading">
+                  <Skeleton width="100%" height="30px" borderRadius="12px" />
+                </h3>
+                <h3 className="nftresult__heading">
+                  <Skeleton width="100%" height="30px" borderRadius="12px" />
+                </h3>
+                <h3 className="nftresult__heading">
+                  <Skeleton width="100%" height="30px" borderRadius="12px" />
+                </h3>
+                <h3 className="nftresult__heading">
+                  <Skeleton width="100%" height="30px" borderRadius="12px" />
+                </h3>
+                <h3 className="nftresult__heading">
+                  <Skeleton width="100%" height="30px" borderRadius="12px" />
+                </h3>
+              </div>
+            ) : (
+              <div className="nftsaledetails__subcontainer">
+                <div className="nftimg__left-container">
+                  <div className="nft__image--wrapper">
+                    <img />
+                  </div>
+                </div>
+                <div className="nftresult__right-container">
+                  <h3 className="nftresult__heading">
+                    Sale Amount:{" "}
+                    {!data ? null : data?.events.nft.amount / lamports} SOL
+                  </h3>
+                  <h3 className="nftresult__heading">
+                    Seller: {data?.events.nft.seller}
+                  </h3>
+                  <h3 className="nftresult__heading">
+                    Buyer: {data?.events.nft.buyer}
+                  </h3>
+                  <h3 className="nftresult__heading">
+                    Marketplace Sold On: {data?.events.nft.source}
+                  </h3>
+                  <h3 className="nftresult__heading">
+                    Mint Address: {data?.events.nft.nfts[0].mint}
+                  </h3>
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+    </div>
   );
 }
 

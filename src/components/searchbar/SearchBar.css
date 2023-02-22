@@ -1,7 +1,6 @@
 #searchbar {
-  min-height: 30vh;
-  background-color: #fff;
-  padding-top: 40px;
+  background-color: #0d0d0d;
+  padding: 40px 0;
 }
 
 .searchbar__container {
@@ -10,13 +9,18 @@
 }
 
 .searchButton {
-  background-color: #313131;
+  background-color: #ea8c55;
   border: none;
   border-radius: 6px;
   padding: 16px;
   margin-left: 8px;
   font-family: "Lato";
   color: #f6f2df;
+  transition: transform 0.2s ease-in;
+}
+
+.searchButton:active {
+  transform: translateY(3px);
 }
 
 .searchTerm {
@@ -24,8 +28,8 @@
   border-radius: 6px;
   padding: 16px 24px 16px 24px;
   margin-right: 8px;
-  background-color: #313131;
-  color: #f6f2df;
+  background-color: #ea8c55;
+  color: #ffffff;
   font-family: "Lato";
   width: 500px;
 }
@@ -33,7 +37,7 @@
 ::placeholder {
   font-family: "Lato";
   font-size: 16px;
-  color: #f6f2df;
+  color: #ffffff;
   width: 300px;
   padding-right: 100px;
 }
