@@ -52,6 +52,7 @@ function NftSaleDetails({ searchTerm }) {
 
   function royalty(creators) {
     setmetaDataLoading(true);
+    let royaltyPaidText = ""; // Initialize a variable to hold the concatenated values
     for (const creator of creators) {
       if (creator.share > 0) {
         const royaltypayment = nativeTrf.filter(
@@ -59,16 +60,18 @@ function NftSaleDetails({ searchTerm }) {
         );
         if (royaltypayment.length > 0) {
           const payentAmt = royaltypayment[0].amount;
-          setRoyaltyPaid(
-            ` ✅ ${payentAmt / lamports} was paid to ${creator.address}`
-          );
+          royaltyPaidText += `✅ ${(payentAmt / lamports).toFixed(
+            2
+          )} SOL was paid to ${creator.address}`; // Concatenate the string
           console.log(` ✅ ${payentAmt} was paid to ${creator.address}`);
         } else {
-          setRoyaltyPaid(` ❌ Royalties were not paid to ${creator.address}`);
+          royaltyPaidText += ` ❌ Royalties were not paid to ${creator.address}`; // Concatenate the string
           console.log(` ❌ Royalties were not paid to ${creator.address}`);
         }
       }
     }
+
+    setRoyaltyPaid(royaltyPaidText); // Set the concatenated string as the state of royaltyPaid
     setmetaDataLoading(false);
   }
 
@@ -107,8 +110,21 @@ function NftSaleDetails({ searchTerm }) {
                 </div>
                 <div className="nftresult__right-container">
                   <h3 className="nftresult__heading">
+                    NFT Name: {metadata?.onChainData?.data.name}
+                  </h3>
+                  <h3 className="nftresult__heading">
+                    Creator Royalty:{" "}
+                    {(
+                      metadata?.onChainData?.data.sellerFeeBasisPoints / 100
+                    ).toFixed(1)}{" "}
+                    %
+                  </h3>
+                  <h3 className="nftresult__heading">
                     Sale Amount:{" "}
-                    {!data ? null : data?.events.nft.amount / lamports} SOL
+                    {!data
+                      ? null
+                      : (data?.events.nft.amount / lamports).toFixed(2)}{" "}
+                    SOL
                   </h3>
                   <h3 className="nftresult__heading">
                     Seller: {data?.events.nft.seller}
@@ -117,12 +133,17 @@ function NftSaleDetails({ searchTerm }) {
                     Buyer: {data?.events.nft.buyer}
                   </h3>
                   <h3 className="nftresult__heading">
-                    Marketplace Sold On: {data?.events.nft.source}
+                    Marketplace Sold On:{" "}
+                    {(data?.events.nft.source).replace("_", " ")}
                   </h3>
                   <h3 className="nftresult__heading">
                     Mint Address: {data?.events.nft.nfts[0].mint}
                   </h3>
-                  <h3 className="nftresult__heading">{royaltyPaid}</h3>
+                  <h3
+                    className="nftresult__heading"
+                    style={{ whiteSpace: "pre-wrap" }}>
+                    {royaltyPaid.split("✅" || "❌").join("\n✅" || "\n❌")}
+                  </h3>
                 </div>
               </div>
             ) : (

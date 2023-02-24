@@ -29,7 +29,7 @@
   padding: 16px 24px 16px 24px;
   margin-right: 8px;
   background-color: #ea8c55;
-  color: #ffffff;
+  color: #ebe6e6;
   font-family: "Lato";
   width: 500px;
 }
@@ -37,7 +37,7 @@
 ::placeholder {
   font-family: "Lato";
   font-size: 16px;
-  color: #ffffff;
+  color: #ebe6e6;
   width: 300px;
   padding-right: 100px;
 }

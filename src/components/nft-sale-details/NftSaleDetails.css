@@ -18,7 +18,7 @@
   font-family: "Montserrat";
   font-size: 36px;
   padding-top: 24px;
-  color: #ffffff;
+  color: #ebe6e6;
 }
 
 .nftsaledetails__subcontainer {
@@ -27,19 +27,19 @@
   flex-direction: row;
   justify-content: center;
   font-family: "Lato";
-  color: #ffffff;
+  color: #ebe6e6;
 }
 
 .nftimg__left-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30%;
+  width: 35%;
   margin: 0 16px 0 16px;
 }
 
 .nftresult__right-container {
-  width: 600px;
+  width: 550px;
   border-radius: 8px;
   margin: 0 16px 0 16px;
   background-color: #202020b3;
@@ -77,4 +77,12 @@
   justify-content: center;
   align-items: center;
   padding-top: 40px;
+}
+
+.green {
+  color: #1dbf73;
+}
+
+.green {
+  color: #ff4d4f;
 }
