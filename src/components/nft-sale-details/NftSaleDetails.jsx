@@ -21,7 +21,7 @@ function NftSaleDetails({ searchTerm }) {
           transactions: [searchFeildString],
         }
       );
-      console.log("Parse Txn: ", data[0]);
+
       setData(data[0]);
       setLoading(false);
     } catch (err) {
@@ -37,7 +37,7 @@ function NftSaleDetails({ searchTerm }) {
         `https://api.helius.xyz/v0/tokens/metadata?api-key=${apiKey}`,
         { mintAccounts: mintAdd }
       );
-      console.log("metadata: ", data[0]);
+
       setMetaData(data[0]);
       setmetaDataLoading(false);
       royalty(data[0].onChainData.data.creators);
@@ -63,10 +63,8 @@ function NftSaleDetails({ searchTerm }) {
           royaltyPaidText += `✅ ${(payentAmt / lamports).toFixed(
             2
           )} SOL was paid to ${creator.address}`; // Concatenate the string
-          console.log(` ✅ ${payentAmt} was paid to ${creator.address}`);
         } else {
           royaltyPaidText += ` ❌ Royalties were not paid to ${creator.address}`; // Concatenate the string
-          console.log(` ❌ Royalties were not paid to ${creator.address}`);
         }
       }
     }
