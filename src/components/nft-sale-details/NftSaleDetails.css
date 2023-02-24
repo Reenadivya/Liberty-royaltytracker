@@ -23,26 +23,28 @@
 
 .nftsaledetails__subcontainer {
   margin-top: 40px;
-  width: 540px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   font-family: "Lato";
   color: #ffffff;
 }
 
 .nftimg__left-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 30%;
   margin: 0 16px 0 16px;
 }
 
 .nftresult__right-container {
-  width: 100%;
+  width: 600px;
   border-radius: 8px;
   margin: 0 16px 0 16px;
-  background-color: #1d1d1d;
-  box-shadow: rgba(179, 181, 186, 0.386) 0px 4px 8px -2px,
-    rgba(92, 95, 98, 0.842) 0px 0px 0px 1px;
+  background-color: #202020b3;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.4);
+  padding: 16px;
 }
 
 .nftresult__heading {
@@ -66,4 +68,13 @@
 .null__background {
   background-color: #0d0d0d;
   height: 100vh;
+}
+
+.null__background--text {
+  font-family: "Lato";
+  color: #1dbf73;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 40px;
 }

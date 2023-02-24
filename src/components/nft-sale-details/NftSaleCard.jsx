@@ -4,8 +4,6 @@ import axios from "axios";
 
 function NftSaleCard({ data, loading }) {
   console.log(loading);
-  const apiKey = "2865692e-2c75-42e5-ba5a-4fa45f213a41";
-  const lamports = 10 ** 9;
   const mintAcc = data?.events.nft.nfts[0].mint;
   const [img, setImg] = useState();
   const mountedRef = useRef(true);
