@@ -30,7 +30,7 @@ function NftSaleCollectionQuery() {
   };
 
   const mintAcc = sales[0]?.nfts[0]?.mint;
-  console.log(mintAcc);
+
   async function getMetaData(mintAdd) {
     try {
       setLoading(true);
@@ -72,8 +72,6 @@ function NftSaleCollectionQuery() {
     }
   }, [sales]);
 
-  console.log(sales);
-  console.log(metadata);
   return (
     <div>
       {sales?.length === 0 ? (
