@@ -13,7 +13,10 @@ function SearchResults() {
 
   return (
     <div>
-      <SearchBar handleSubmit={handleSubmit} />
+      <SearchBar
+        handleSubmit={handleSubmit}
+        placeholderText={"Enter Transaction ID"}
+      />
       <NftSaleDetails searchTerm={searchTerm} />
     </div>
   );

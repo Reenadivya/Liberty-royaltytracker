@@ -9,6 +9,7 @@ function NftSaleCollectionQuery() {
   const [searchTerm, setSearchTerm] = useState();
   const [sales, setSales] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [metadata, setMetadata] = useState();
   const [page, setPage] = useState(1);
   const url = `https://api.helius.xyz/v1/nft-events?api-key=2865692e-2c75-42e5-ba5a-4fa45f213a41`;
   const RESULTS_PER_PAGE = 10;
@@ -24,9 +25,27 @@ function NftSaleCollectionQuery() {
         },
       },
     });
-    setSales((prevSales) => [...prevSales, ...data?.result]);
+    setSales(data?.result);
     setLoading(false);
   };
+
+  const mintAcc = sales[0]?.nfts[0]?.mint;
+  console.log(mintAcc);
+  async function getMetaData(mintAdd) {
+    try {
+      setLoading(true);
+      const { data } = await axios.post(
+        `https://api.helius.xyz/v0/tokens/metadata?api-key=2865692e-2c75-42e5-ba5a-4fa45f213a41`,
+        { mintAccounts: mintAdd }
+      );
+
+      setMetadata(data[0]);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      console.log("Error: ", err);
+    }
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -46,12 +65,49 @@ function NftSaleCollectionQuery() {
     }
   }, [searchTerm]);
 
+  useEffect(() => {
+    if (sales?.length > 0 && sales[0]?.nfts.length > 0) {
+      const mintAcc = sales[0]?.nfts[0].mint;
+      getMetaData([mintAcc]);
+    }
+  }, [sales]);
+
+  console.log(sales);
+  console.log(metadata);
   return (
     <div>
       {sales?.length === 0 ? (
         <section id="nftsalecollectionquery">
+          <div className="container">
+            <h1 className="header">Query Your Favourite NFT Collections</h1>
+            <h3 className="subheader">
+              ‼️Please read this first before querying‼️
+            </h3>
+            <p className="faq">How to query</p>
+            <p className="faq__para">
+              You can find the verified collection address for an NFT on Solana
+              by checking the NFT's metadata. NFT metadata often includes a
+              field called "collection" or "collectionAddress" that contains the
+              verified collection address.<br></br>
+              You can also check on popular Solana explorers like, Solscan or
+              solana.fm to see if the NFT is listed there. If it is, it should
+              be listed in the NFT metadata tab, under tokenStandard ➡️
+              collection ➡️ key collection address. Finally, some NFT creators
+              or projects may provide the verified collection address on their
+              official website or social media accounts.
+            </p>
+          </div>
+          <SearchBar
+            handleSubmit={handleSubmit}
+            placeholderText={"Enter NFT Collection Address"}
+          />
+        </section>
+      ) : (
+        <section id="nftsalecollectionquery">
           <h1 className="header">Query Your Favourite NFT Collections</h1>
-          <h3 className="subheader">Please read this first before querying</h3>
+          <h3 className="subheader">
+            ‼️Please read this first before querying‼️
+          </h3>
           <p className="faq">How to query</p>
           <p className="faq__para">
             You can typically find the verified collection address for an NFT on
@@ -66,31 +122,14 @@ function NftSaleCollectionQuery() {
             social media accounts.
           </p>
           <SearchBar handleSubmit={handleSubmit} />
-        </section>
-      ) : (
-        <>
-          <section id="nftsalecollectionquery">
-            <h1 className="header">Query Your Favourite NFT Collections</h1>
-            <h3 className="subheader">
-              Please read this first before querying
-            </h3>
-            <p className="faq">How to query</p>
-            <p className="faq__para">
-              You can typically find the verified collection address for an NFT
-              on Solana by checking the NFT's metadata. NFT metadata often
-              includes a field called "collection" or "collectionAddress" that
-              contains the verified collection address.<br></br>
-              You can also check on popular Solana explorers like, Solscan or
-              solana.fm to see if the NFT is listed there. If it is, it should
-              be listed in the NFT metadata tab, under tokenStandard ➡️
-              collection ➡️ key collection address. Finally, some NFT creators
-              or projects may provide the verified collection address on their
-              official website or social media accounts.
-            </p>
-            <SearchBar handleSubmit={handleSubmit} />
-          </section>
           <div className="dashboard">
-            <h2 className="dashboard__header">Collection Name: ABC</h2>
+            <h2 className="dashboard__header">
+              Collection Symbol:{" "}
+              {(metadata?.offChainData?.symbol)
+                .split("_")
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(" ")}
+            </h2>
             <div className="table">
               <table>
                 <thead>
@@ -119,7 +158,7 @@ function NftSaleCollectionQuery() {
               resultsPerPage={RESULTS_PER_PAGE}
             />
           </div>
-        </>
+        </section>
       )}
     </div>
   );

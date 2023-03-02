@@ -3,31 +3,28 @@ import Skeleton from "../skeleton/Skeleton";
 
 function DashboadRow({ data, loading }) {
   const lamports = 10 ** 9;
+
   return (
     <>
       {loading ? (
         <tr className="table__row">
-          <td colSpan={6}>
-            <div className="dashboard__row">
-              <div className="dashboard__nftName column">
-                <Skeleton width="50px" height="35px" borderRadius="8px" />
-              </div>
-              <div className="dashboard__buyer column">
-                <Skeleton width="300px" height="35px" borderRadius="8px" />
-              </div>
-              <div className="dashboard__seller column">
-                <Skeleton width="300px" height="35px" borderRadius="8px" />
-              </div>
-              <div className="dashboard__source column">
-                <Skeleton width="50px" height="35px" borderRadius="8px" />
-              </div>
-              <div className="dashboard__saleAmount column">
-                <Skeleton width="50px" height="35px" borderRadius="8px" />
-              </div>
-              <div className="dashboard__signature column  long-string">
-                <Skeleton width="100px" height="35px" borderRadius="8px" />
-              </div>
-            </div>
+          <td>
+            <Skeleton width="120px" height="35px" borderRadius="8px" />
+          </td>
+          <td>
+            <Skeleton width="290px" height="35px" borderRadius="8px" />
+          </td>
+          <td>
+            <Skeleton width="290px" height="35px" borderRadius="8px" />
+          </td>
+          <td>
+            <Skeleton width="95px" height="35px" borderRadius="8px" />
+          </td>
+          <td>
+            <Skeleton width="70px" height="35px" borderRadius="8px" />
+          </td>
+          <td>
+            <Skeleton width="280px" height="35px" borderRadius="8px" />
           </td>
         </tr>
       ) : (
@@ -35,8 +32,8 @@ function DashboadRow({ data, loading }) {
           <td>{data?.nfts[0]?.name}</td>
           <td>{data?.buyer}</td>
           <td>{data?.seller}</td>
-          <td>{data?.source}</td>
-          <td>{data?.amount / lamports} SOL</td>
+          <td>{(data?.source).replace("_", " ")}</td>
+          <td>{(data?.amount / lamports).toFixed(2)} SOL</td>
           <td>{data?.signature}</td>
         </tr>
       )}

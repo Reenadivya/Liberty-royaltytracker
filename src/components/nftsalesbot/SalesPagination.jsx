@@ -7,12 +7,18 @@ function SalesPagination({ page, setPage, totalResults, resultsPerPage }) {
   const maxPage = Math.ceil(totalResults / resultsPerPage);
 
   return (
-    <div>
-      <button onClick={handlePrevPage} disabled={page === 1}>
+    <div className="pagination">
+      <button
+        onClick={handlePrevPage}
+        disabled={page === 1}
+        className="pagination__btn">
         Prev
       </button>
-      <span>Page {page}</span>
-      <button onClick={handleNextPage} disabled={page === maxPage}>
+      <span className="page__number">Page {page}</span>
+      <button
+        onClick={handleNextPage}
+        disabled={page === maxPage}
+        className="pagination__btn">
         Next
       </button>
     </div>

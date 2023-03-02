@@ -1,7 +1,7 @@
 import React from "react";
 import "./SearchBar.css";
 
-function SearchBar({ handleSubmit }) {
+function SearchBar({ handleSubmit, placeholderText }) {
   return (
     <section id="searchbar">
       <div className="searchbar__container">
@@ -9,7 +9,7 @@ function SearchBar({ handleSubmit }) {
           <input
             type="text"
             className="searchTerm"
-            placeholder="Enter Transaction ID"
+            placeholder={placeholderText}
           />
           <button type="submit" className="searchButton">
             Submit
