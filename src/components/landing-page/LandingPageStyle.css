@@ -28,7 +28,7 @@
 .landingpage__section--subheading {
   font-family: "Lato";
   font-size: 40px;
-  padding: 16px 0 16px 0;
+  margin: 16px 0 16px 0;
 }
 .landingpage__section--para {
   font-family: "Lato";
@@ -69,4 +69,20 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: shimmer 3s linear infinite;
+}
+
+@media (max-width: 500px) {
+  .landingpage__section--header {
+    font-size: 48px;
+    padding: 0 18px;
+  }
+  .landingpage__section--para {
+    padding: 0 18px;
+    font-size: 20px;
+  }
+
+  .landingpage__section--subheading {
+    font-size: 32px;
+    margin: 24px 0 24px 0;
+  }
 }

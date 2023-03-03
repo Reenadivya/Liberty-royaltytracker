@@ -4,14 +4,16 @@ import SearchBar from "../searchbar/SearchBar";
 import "./NftSaleCollectionQuery.css";
 import SalesPagination from "./SalesPagination";
 import DashboadRow from "./DashboadRow";
+require("dotenv").config();
 
 function NftSaleCollectionQuery() {
+  const apiKey = process.env.HELIUS_API_KEY;
   const [searchTerm, setSearchTerm] = useState();
   const [sales, setSales] = useState([]);
   const [loading, setLoading] = useState(false);
   const [metadata, setMetadata] = useState();
   const [page, setPage] = useState(1);
-  const url = `https://api.helius.xyz/v1/nft-events?api-key=2865692e-2c75-42e5-ba5a-4fa45f213a41`;
+  const url = `https://api.helius.xyz/v1/nft-events?api-key=${apiKey}`;
   const RESULTS_PER_PAGE = 10;
 
   const getSales = async (searchterm) => {
@@ -35,7 +37,7 @@ function NftSaleCollectionQuery() {
     try {
       setLoading(true);
       const { data } = await axios.post(
-        `https://api.helius.xyz/v0/tokens/metadata?api-key=2865692e-2c75-42e5-ba5a-4fa45f213a41`,
+        `https://api.helius.xyz/v0/tokens/metadata?api-key=${apiKey}`,
         { mintAccounts: mintAdd }
       );
 
@@ -123,10 +125,11 @@ function NftSaleCollectionQuery() {
           <div className="dashboard">
             <h2 className="dashboard__header">
               Collection Symbol:{" "}
-              {(metadata?.offChainData?.symbol)
-                .split("_")
-                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                .join(" ")}
+              {metadata?.offChainData?.symbol &&
+                metadata.offChainData.symbol
+                  .split("_")
+                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                  .join(" ")}
             </h2>
             <div className="table">
               <table>

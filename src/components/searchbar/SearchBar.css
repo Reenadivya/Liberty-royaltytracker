@@ -5,6 +5,7 @@
 
 .searchbar__container {
   display: flex;
+  flex-direction: row;
   justify-content: center;
 }
 
@@ -44,4 +45,28 @@
 
 :focus {
   outline: none;
+}
+
+@media (max-width: 630px) {
+  #searchbar {
+    padding: 32px 0;
+  }
+  .search {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .searchButton {
+    margin-top: 10px;
+  }
+
+  .searchTerm {
+    width: 400px;
+  }
+
+  .null__background--text {
+    text-align: center;
+    padding: 0 16px;
+  }
 }

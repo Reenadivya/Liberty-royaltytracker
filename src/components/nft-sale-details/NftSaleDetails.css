@@ -86,3 +86,26 @@
 .green {
   color: #ff4d4f;
 }
+
+@media (max-width: 1200px) {
+  .nftsaledetails__subcontainer {
+    flex-direction: column;
+    align-items: center;
+  }
+  .nftimg__left-container {
+    margin-bottom: 24px;
+  }
+  .nftresult__right-container {
+    margin-top: 24px;
+  }
+}
+
+@media (max-width: 590px) {
+  #nftsaledetails {
+    overflow: hidden;
+  }
+  .nftresult__right-container {
+    width: 400px;
+    overflow-wrap: break-word;
+  }
+}

@@ -2,9 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import "./NftSaleDetails.css";
 import Skeleton from "../skeleton/Skeleton";
 import axios from "axios";
+require("dotenv").config();
 
 function NftSaleDetails({ searchTerm }) {
-  const apiKey = "2865692e-2c75-42e5-ba5a-4fa45f213a41";
+  const apiKey = process.env.HELIUS_API_KEY;
   const lamports = 10 ** 9;
   const [data, setData] = useState(null);
   const [metadata, setMetaData] = useState(null);

@@ -58,3 +58,12 @@ a {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
+
+@media (max-width: 500px) {
+  .navbar__container--right {
+    display: none;
+  }
+  .navbar__container {
+    justify-content: center;
+  }
+}
