@@ -4,10 +4,9 @@ import SearchBar from "../searchbar/SearchBar";
 import "./NftSaleCollectionQuery.css";
 import SalesPagination from "./SalesPagination";
 import DashboadRow from "./DashboadRow";
-require("dotenv").config();
 
 function NftSaleCollectionQuery() {
-  const apiKey = process.env.HELIUS_API_KEY;
+  const apiKey = process.env.REACT_APP_API_KEY;
   const [searchTerm, setSearchTerm] = useState();
   const [sales, setSales] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -30,8 +29,6 @@ function NftSaleCollectionQuery() {
     setSales(data?.result);
     setLoading(false);
   };
-
-  const mintAcc = sales[0]?.nfts[0]?.mint;
 
   async function getMetaData(mintAdd) {
     try {

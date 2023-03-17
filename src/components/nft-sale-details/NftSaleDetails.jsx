@@ -2,10 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import "./NftSaleDetails.css";
 import Skeleton from "../skeleton/Skeleton";
 import axios from "axios";
-require("dotenv").config();
 
 function NftSaleDetails({ searchTerm }) {
-  const apiKey = process.env.HELIUS_API_KEY;
+  const apiKey = process.env.REACT_APP_API_KEY;
   const lamports = 10 ** 9;
   const [data, setData] = useState(null);
   const [metadata, setMetaData] = useState(null);
@@ -41,36 +40,36 @@ function NftSaleDetails({ searchTerm }) {
 
       setMetaData(data[0]);
       setmetaDataLoading(false);
-      royalty(data[0].onChainData.data.creators);
+      royalty(data[0]?.onChainData?.data?.creators);
     } catch (err) {
       setmetaDataLoading(false);
       console.log("Error: ", err);
     }
   }
 
-  const mintAcc = data?.events.nft.nfts[0].mint;
+  const mintAcc = data?.events?.nft?.nfts?.[0]?.mint;
   const nativeTrf = data?.nativeTransfers;
 
   function royalty(creators) {
     setmetaDataLoading(true);
-    let royaltyPaidText = ""; // Initialize a variable to hold the concatenated values
-    for (const creator of creators) {
+    let royaltyPaidText = "";
+    creators?.forEach((creator) => {
       if (creator.share > 0) {
-        const royaltypayment = nativeTrf.filter(
+        const royaltypayments = nativeTrf?.filter(
           (trf) => trf.toUserAccount === creator.address
         );
-        if (royaltypayment.length > 0) {
-          const payentAmt = royaltypayment[0].amount;
-          royaltyPaidText += `✅ ${(payentAmt / lamports).toFixed(
-            2
-          )} SOL was paid to ${creator.address}`; // Concatenate the string
+        if (royaltypayments.length > 0) {
+          royaltypayments.forEach((payment) => {
+            const paymentAmount = (payment.amount / lamports).toFixed(2);
+            royaltyPaidText += `✅ ${paymentAmount} SOL was paid to ${creator.address}\n`;
+          });
         } else {
-          royaltyPaidText += ` ❌ Royalties were not paid to ${creator.address}`; // Concatenate the string
+          royaltyPaidText += `❌ Royalties were not paid to ${creator.address}\n`;
         }
       }
-    }
+    });
 
-    setRoyaltyPaid(royaltyPaidText); // Set the concatenated string as the state of royaltyPaid
+    setRoyaltyPaid(royaltyPaidText);
     setmetaDataLoading(false);
   }
 
