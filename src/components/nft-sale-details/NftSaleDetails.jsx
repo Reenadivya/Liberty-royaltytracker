@@ -5,12 +5,24 @@ import axios from "axios";
 
 function NftSaleDetails({ searchTerm }) {
   const apiKey = process.env.REACT_APP_API_KEY;
+  console.log(apiKey);
   const lamports = 10 ** 9;
   const [data, setData] = useState(null);
   const [metadata, setMetaData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [metaDataLoading, setmetaDataLoading] = useState(true);
   const [royaltyPaid, setRoyaltyPaid] = useState("");
+
+  const url1 = `https://api.helius.xyz/v0/transactions/?api-key=${apiKey}`;
+  const parseTransaction = async () => {
+    const { data } = await axios.post(url1, {
+      transactions: [
+        "2AcrBTxs9VvyQD38WbK91yeiQunN3AozENgKSqzTrHu5qoJJLnvdqBVWrwsrH26J22Cg2y6wqaTauWtUnRi2xkKW",
+      ],
+    });
+    console.log("parsed transaction: ", data);
+  };
+  parseTransaction();
 
   async function parseTxn(searchFeildString) {
     try {
@@ -23,6 +35,7 @@ function NftSaleDetails({ searchTerm }) {
       );
 
       setData(data[0]);
+      console.log(data[0]);
       setLoading(false);
     } catch (err) {
       setLoading(false);
@@ -39,6 +52,7 @@ function NftSaleDetails({ searchTerm }) {
       );
 
       setMetaData(data[0]);
+      console.log(data[0]);
       setmetaDataLoading(false);
       royalty(data[0]?.onChainData?.data?.creators);
     } catch (err) {
@@ -47,7 +61,8 @@ function NftSaleDetails({ searchTerm }) {
     }
   }
 
-  const mintAcc = data?.events?.nft?.nfts?.[0]?.mint;
+  const mintAcc = data?.tokenTransfers[0]?.mint;
+  console.log("Mint:", mintAcc);
   const nativeTrf = data?.nativeTransfers;
 
   function royalty(creators) {
@@ -117,26 +132,43 @@ function NftSaleDetails({ searchTerm }) {
                     ).toFixed(1)}{" "}
                     %
                   </h3>
-                  <h3 className="nftresult__heading">
-                    Sale Amount:{" "}
-                    {!data
-                      ? null
-                      : (data?.events.nft.amount / lamports).toFixed(2)}{" "}
-                    SOL
-                  </h3>
-                  <h3 className="nftresult__heading">
-                    Seller: {data?.events.nft.seller}
-                  </h3>
-                  <h3 className="nftresult__heading">
-                    Buyer: {data?.events.nft.buyer}
-                  </h3>
-                  <h3 className="nftresult__heading">
-                    Marketplace Sold On:{" "}
-                    {(data?.events.nft.source).replace("_", " ")}
-                  </h3>
-                  <h3 className="nftresult__heading">
-                    Mint Address: {data?.events.nft.nfts[0].mint}
-                  </h3>
+                  {data?.type !== "SWAP" && (
+                    <>
+                      <h3 className="nftresult__heading">
+                        Sale Amount:{" "}
+                        {!data
+                          ? null
+                          : (data?.events?.nft?.amount / lamports).toFixed(
+                              2
+                            )}{" "}
+                        SOL
+                      </h3>
+                      <h3 className="nftresult__heading">
+                        Seller: {data?.events?.nft?.seller}
+                      </h3>
+                      <h3 className="nftresult__heading">
+                        Buyer: {data?.events?.nft?.buyer}
+                      </h3>
+                      <h3 className="nftresult__heading">
+                        Mint Address: {data?.events?.nft?.nfts?.[0]?.mint}
+                      </h3>
+                    </>
+                  )}
+
+                  {data?.type !== "SWAP" ? (
+                    <h3 className="nftresult__heading">
+                      Marketplace Sold On:{" "}
+                      {(data?.events?.nft?.source || "").replace("_", " ")}
+                    </h3>
+                  ) : (
+                    <>
+                      <h3 className="nftresult__heading">
+                        Marketplace Sold On: {data?.source}
+                      </h3>
+                      <h3 className="nftresult__heading">Sale Type: SWAP</h3>
+                    </>
+                  )}
+
                   <h3
                     className="nftresult__heading"
                     style={{ whiteSpace: "pre-wrap" }}>
