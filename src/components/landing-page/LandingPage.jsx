@@ -20,7 +20,7 @@ function LandingPage() {
       </div>
       <div className="scroll">
         <button className="btn">
-          <Link to="/" className="scroll--heading">
+          <Link to="/royalty" className="scroll--heading">
             Start Your Search Now
           </Link>
         </button>

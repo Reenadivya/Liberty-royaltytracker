@@ -8,7 +8,9 @@ function Nav() {
     <nav>
       <div className="navbar__container">
         <div className="navbar__container--right">
-          <img className="navbar__logo" src={Logo} alt="" />
+          <Link to="/">
+            <img className="navbar__logo" src={Logo} alt="" />
+          </Link>
         </div>
         <div className="navbar__container--left">
           <ul className="navbar__list">
